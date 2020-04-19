@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Parameter Setting -->
+  <arg name="holo_tf_topic" default="holo_transform" />
+  <arg name="model" default="humanoid" />
+  <arg name="urdf_file" default="xacro --inorder '$(find holo_description)/robots/$(arg model).urdf'" />
+  
+  <param name="robot_description" command="$(arg urdf_file)" />
+
+  <!-- Bring up human model -->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+    <param name="publish_frequency" type="double" value="5.0" />
+  </node>
+
+  <!-- Bringup HoloLens streamer -->
+  <include file="$(find holo_streaming)/launch/nav_streaming.launch">
+    <arg name="path_topic" value="/move_base/NavfnROS/plan" />
+  </include>
+  
+  <!-- Pubish HoloLens Odometry -->
+  <include file="$(find holo_odom)/launch/publish_holo_odom.launch">
+    <arg name="holo_tf_topic" value="$(arg holo_tf_topic)" />
+  </include>
+
+</launch>

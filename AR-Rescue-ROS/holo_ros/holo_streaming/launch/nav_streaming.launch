@@ -1,0 +1,32 @@
+<launch>
+    <param name="n_points" type="int" value="65" />
+    <param name="step_size" type="int" value="5" />
+
+    <arg name="path_topic" default="/move_base/NavfnROS/plan" />
+    <arg name="left_cam_image_topic" default="/camera/right/image_raw" />
+    <arg name="right_cam_image_topic" default="/camera/left/image_raw" />
+
+    <!-- Receiving Camera Transform from HoloLens -->
+    <node pkg="holo_streaming" type="holo_tf_receiver.py" name="holo_tf_receiver" />
+
+    <!-- Receive HoloLens Left Visible light camera image -->
+    <node pkg="holo_streaming" type="holo_sensor_receiver.py" name="holo_left_camera" output="screen">
+        <remap from="image_topic" to="$(arg left_cam_image_topic)" />
+        <param name="port" type="int" value="8800" />
+        <param name="host" value="192.168.1.152" />
+    </node>
+
+    <!-- Receive HoloLens Right Visible light camera image -->
+    <node pkg="holo_streaming" type="holo_sensor_receiver.py" name="holo_right_camera" output="screen">
+        <remap from="image_topic" to="$(arg right_cam_image_topic)" />
+        <param name="port" type="int" value="8801" />
+        <param name="host" value="192.168.1.152" />
+    </node>
+    
+    <!-- Publish Path information to HoloLens -->
+    <node pkg="holo_streaming" type="holo_publisher.py" name="holo_publisher" output="screen">
+        <remap from="path_plan" to="$(arg path_topic)" />
+    </node>
+
+</launch>
+

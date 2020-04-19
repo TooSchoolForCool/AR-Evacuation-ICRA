@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="world_name" default="bh9f_lab_map" />
+    <arg name="map_file" default="$(find holo_evacuation)/assets/$(arg world_name).yaml" />
+    <arg name="model" default="two_humanoid" />
+    <arg name="urdf_file" default="xacro --inorder '$(find holo_description)/robots/$(arg model).urdf'" />
+    
+    <param name="robot_description" command="$(arg urdf_file)" />
+    
+    <!-- Load Map into Map Server -->
+    <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+
+    <!-- Bring up human model -->
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+        <param name="publish_frequency" type="double" value="5.0" />
+    </node>
+
+    <!-- Launch rviz with our favorite config file -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find loc_scheme_animation)/rviz/localization_scheme.rviz" />
+    
+    <!-- Init robot pose -->
+    <!-- <node pkg="tf" type="static_transform_publisher" name="robot_init" 
+        args="-8 0.35 0.015 0 0 0 1 map agent_1_base_footprint 100" /> -->
+</launch>

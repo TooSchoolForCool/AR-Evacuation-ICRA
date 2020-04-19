@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Bringup HoloLens Related Nodes -->
+  <include file="$(find holo_evacuation)/launch/includes/holo_bringup.launch.xml" />
+  <!-- Launch Path Planner -->
+  <include file="$(find holo_evacuation)/launch/includes/path_planner.launch.xml" />
+
+
+  <arg name="world_name" default="9f_lab" />
+  <!-- <arg name="world_name" default="bh_9f_real" /> -->
+  <arg name="map_file" default="$(find holo_evacuation)/assets/$(arg world_name).yaml" />
+
+  <!-- Load Map into Map Server -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+  <!-- Transform between odom and map -->
+  <node pkg="tf" type="static_transform_publisher" name="map2odom" 
+    args="0 0 0 0 0 0 1 map odom 100" />
+
+</launch>

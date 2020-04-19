@@ -1,0 +1,7 @@
+<launch>
+
+  <!-- Launch rviz with our favorite config file -->
+  <node name="rviz" pkg="rviz" type="rviz" 
+    args="-d $(find holo_rviz_launchers)/rviz/holo_evacuation.rviz" />
+  
+</launch>

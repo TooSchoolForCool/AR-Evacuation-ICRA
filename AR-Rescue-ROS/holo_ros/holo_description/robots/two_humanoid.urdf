@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot name="two_humanoid" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:include filename="$(find holo_description)/models/humanoid.urdf.xacro"/>
+    <xacro:include filename="$(find holo_description)/materials/colors.xacro" />
+
+    <!-- create agent 1 -->
+    <xacro:humanoid prefix="agent_1" color="green" />
+    <!-- create agent 2 -->
+    <xacro:humanoid prefix="agent_2" color="red" /> 
+
+    <!-- create a joint between agent 1 and agent 2 -->
+    <joint name="agent_1_to_agent_2" type="fixed">
+      <origin xyz="0.01 0.01 0" rpy="0 0 0" />        
+      <parent link="agent_1_base_footprint"/>
+      <child link="agent_2_base_footprint" />
+    </joint>
+</robot>

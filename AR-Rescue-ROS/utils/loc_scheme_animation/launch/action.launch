@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="agent_1_base_link" default="agent_1_base_footprint" />
+    <arg name="agent_2_base_link" default="agent_2_base_footprint" />
+
+    <!-- Agent Controller -->
+    <arg name="move_speed" default="0.005" />
+    <arg name="turn_speed" default="0.0345" />
+    <!-- <arg name="move_speed" default="0.03" /> -->
+    <!-- <arg name="turn_speed" default="0.0345" /> -->
+    <arg name="update_frequency" default="30" />
+
+    <!-- MLoc -->
+    <arg name="gaussian_mu" default="0.1" />
+    <arg name="gaussian_sigma" default="0.2" />
+    
+    <!-- Create agent controller -->
+    <node pkg="loc_scheme_animation" type="agent_controller.py" name="agent_controller" output="screen">
+        <param name="base_link" value="$(arg agent_1_base_link)" />
+        <param name="speed" type="double" value="$(arg move_speed)" />
+        <param name="herz" type="int" value="$(arg update_frequency)" />
+        <param name="turn_speed" type="double" value="$(arg turn_speed)" />
+    </node>
+
+    <!-- Create system localizatin -->
+    <node pkg="loc_scheme_animation" type="mloc.py" name="m_loc" output="screen">
+        <param name="master_base" value="$(arg agent_1_base_link)" />
+        <param name="base_link" value="$(arg agent_2_base_link)" />
+        <param name="gaussian_mu" type="double" value="$(arg gaussian_mu)" />
+        <param name="gaussian_sigma" type="double" value="$(arg gaussian_sigma)" />
+    </node>
+</launch>

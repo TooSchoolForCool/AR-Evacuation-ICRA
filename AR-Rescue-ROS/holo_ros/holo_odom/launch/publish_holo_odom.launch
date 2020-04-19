@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+  <param name="base_link" value="base_footprint" />
+  
+  <arg name="holo_tf_topic" default="holo_transform" />
+
+  <node pkg="holo_odom" type="holo_odom_pub.py" name="holo_odom_pub">
+    <remap from="holo_tf" to="$(arg holo_tf_topic)" />
+  </node>
+</launch>
