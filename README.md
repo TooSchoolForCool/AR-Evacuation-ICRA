@@ -2,7 +2,7 @@
 
 [![icra-2020-tag](https://img.shields.io/badge/ICRA-2020-blue)](https://www.icra2020.org/registration/attendance-survey) [![website-tag](https://img.shields.io/badge/-Project%20Website-informational)](https://yzhu.io/publication/ar2020icra/) 
 
-[Zeyu Zhang](https://www.zeyuzhang.com), [Hangxin Liu](https://liuhx111.github.io/), [Ziyuan Jiao](https://sites.google.com/g.ucla.edu/zyjiao), [Yixin Zhu](https://yzhu.io/), [Song-Chun Zhu](http://www.stat.ucla.edu/~sczhu/) 
+[Zeyu Zhang](https://zeyuzhang.com), [Hangxin Liu](https://liuhx111.github.io/), [Ziyuan Jiao](https://sites.google.com/g.ucla.edu/zyjiao), [Yixin Zhu](https://yzhu.io/), [Song-Chun Zhu](http://www.stat.ucla.edu/~sczhu/) 
 
 [[Paper]](https://yzhu.io/publication/ar2020icra/paper.pdf) [[Video]](https://vimeo.com/391765127) [[Website]](https://yzhu.io/publication/ar2020icra/)
 
